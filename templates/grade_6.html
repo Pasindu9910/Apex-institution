@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="static/index3.css">
+    <title>GRADE 6</title>
+</head>
+<body>
+    <div id="overlay" class="overlay">
+        <div class="overlay-content password-popup">
+            <span class="close">&times;</span>
+            <div id="popup-content" class="popup-content">
+                <img src="static/Logo.png" style="width: 100px; height: 100px; display: block; margin: 0 auto;margin-bottom: 10px;">
+                <input type="password" id="password-input" placeholder="Enter password">
+                <button id="password-submit">ENTER THE QUIZ</button>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="box" id="box1" data-password="2765">Wonders of The Living World</div>
+        <div class="box" id="box2" data-password="7682">Things Around Us</div>
+        <div class="box" id="box3" data-password="1946">Water as a Natural Resource</div>
+        <div class="box" id="box4" data-password="4986">Energy in Day to Day Life</div>
+        <div class="box" id="box5" data-password="1826">Light and Vision</div>
+        <div class="box" id="box6" data-password="9053">Sound and Hearing</div>
+        <div class="box" id="box7" data-password="2975">Magnets</div>
+        <div class="box" id="box8" data-password="3761">Electricity for a Comfortable Life</div>
+        <div class="box" id="box9" data-password="3986">Heat and Its Effects</div>
+        <div class="box" id="box10" data-password="3056">Food Related Interactions</div>
+        <div class="box" id="box11" data-password="1823">Climatic Changes</div>
+    </div>
+    <button id="refresh-button" style="background-color: yellow; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; position: fixed; top: 20px; right: 20px;">Refresh</button>
+<script>
+    const boxes = document.querySelectorAll('.box');
+    const overlay = document.getElementById('overlay');
+    const closeBtn = document.querySelector('.close');
+    const popupContent = document.getElementById('popup-content');
+    const passwordInput = document.getElementById('password-input');
+    const passwordSubmit = document.getElementById('password-submit');
+
+    boxes.forEach(box => {
+        box.addEventListener('click', () => {
+            const password = box.getAttribute('data-password');
+            if (!password) {
+                // If no password is set, show content directly
+                showContent(box.id);
+            } else {
+                // If password is set, show password input overlay
+                overlay.style.display = 'block';
+                passwordInput.value = '';
+                passwordSubmit.onclick = () => {
+                    const enteredPassword = passwordInput.value.trim();
+                    if (enteredPassword === password) {
+                        // If correct password, show content in the overlay
+                        showContent(box.id);
+                        overlay.style.display = 'none'; // Hide the overlay after showing the content
+                    } else {
+                        alert('Incorrect password. Please try again.');
+                    }
+                };
+            }
+        });
+    });
+
+    closeBtn.addEventListener('click', () => {
+        overlay.style.display = 'none';
+    });
+
+    overlay.addEventListener('click', (event) => {
+        if (event.target === overlay) {
+            overlay.style.display = 'none';
+        }
+    });
+
+    function showContent(boxId) {
+        const content = getDummyText(boxId);
+        popupContent.innerHTML = content;
+    }
+
+    document.getElementById('refresh-button').addEventListener('click', () => {
+        location.reload();
+    });
+    // Function to get dummy text based on box id
+    function getDummyText(boxId) {
+        switch (boxId) {
+            case 'box1':
+                return '<img src="static/grade6/w.jpeg"><center><button style="background-color: purple; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;"><a href="https://forms.gle/zQGMdFBYJQwYJs2y9" style="color: white;">Wonders of The Living World</a></button><center>';
+            case 'box2':
+                return '<img style="width:1120px;height:583px;" src="static/grade6/t.jpg"><center><button style="background-color: purple; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;"><a href="https://forms.gle/ZLpuoygnGKjvTj9N7" style="color: white;">Things Around Us</a></button><center>';
+            case 'box3':
+                return '<img style="width:1120px;height:583px;" src="static/grade6/water.jpg"><center><button style="background-color: purple; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;"><a href="https://forms.gle/QnVNXkatfenXGtHX9" style="color: white;">Water as a Natural Resource</a></button><center>';
+            case 'box4':
+                return '<img style="width:1120px;height:583px;" src="static/grade6/wind.jpg"><center><button style="background-color: purple; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;"><a href="https://forms.gle/kPjf12pUiGUsrAaW9" style="color: white;">Energy in Day to Day Life</a></button><center>';
+            case 'box5':
+                return '<img style="width:1120px;height:583px;" src="static/grade6/light.jpg"><center><button style="background-color: purple; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;"><a href="https://forms.gle/RXFtW1sq7Bj3T5ZF7" style="color: white;">Light and Vision</a></button><center>';
+            case 'box6':
+                return '<img style="width:1120px;height:583px;" src="static/grade6/sound.jpg"><center><button style="background-color: purple; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;"><a href="https://forms.gle/HxEcZ3gVH7nFpegE9" style="color: white;">Sound and Hearing</a></button><center>';
+            case 'box7':
+                return '<img style="width:1120px;height:583px;" src="static/grade6/magnet.jpg"><center><button style="background-color: purple; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;"><a href="https://forms.gle/5iM71qqBEyDCwfEu9" style="color: white;">Magnets</a></button><center>';
+            case 'box8':
+                return '<img style="width:1120px;height:583px;" src="static/grade6/electricity.jpg"><center><button style="background-color: purple; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;"><a href="https://forms.gle/LKXHmAU5jNo6SJnM9" style="color: white;">Electricity for a Comfortable Life</a></button><center>';        
+            case 'box9':
+                return '<img style="width:1120px;height:583px;" src="static/grade6/fire.jpg"><center><button style="background-color: purple; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;"><a href="https://forms.gle/op1cDrCjHWCdMRTW9" style="color: white;">Heat and Its Effects</a></button><center>';
+            case 'box10':
+                return '<img style="width:1120px;height:583px;" src="static/grade6/animals.jpg"><center><button style="background-color: purple; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;"><a href="https://forms.gle/eddSx8Bfm2E185Sj6" style="color: white;">Food Related Interactions</a></button><center>';
+            case 'box11':
+                return '<img style="width:1120px;height:583px;" src="static/grade6/climate.jpg"><center><button style="background-color: purple; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;"><a href="https://forms.gle/F4cdLW8bzr97Wj8TA" style="color: white;">Climatic Changes</a></button><center>';
+            default:
+                return '<p>No content available.</p>';
+        }
+    }
+
+
+
+</script>
+</html>

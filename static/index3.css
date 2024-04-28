@@ -1,0 +1,145 @@
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    position: relative;
+    height: 100vh;
+    background-image: url('background.png'); /* Path to your background image */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover; /* Ensure the background image covers the entire page */
+    background-attachment: fixed; 
+  }
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    margin-top: 50px; /* add this line to create a margin from the top */
+    margin-bottom: 50px;
+}
+
+.box {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: white;
+    font-size: 2.5em;
+    padding: 10px 20px;
+    margin: 10px;
+    transition: all 0.3s ease-in-out;
+    width: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.box:hover {
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+    background: rgba(53, 223, 10, 0.9);
+    color: black;
+    box-shadow: 0 0 10px yellow;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.95); /* White background with some transparency */
+    z-index: 9999;
+}
+
+.overlay-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.password-popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: yellow;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+
+.password-popup::before {
+    content: "";
+    position: absolute;
+    top: -20px;
+    left: calc(50% - 10px);
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent white transparent;
+}
+
+
+#password-input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px; /* Rounded edges for the input field */
+}
+
+#password-submit {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px; /* Rounded edges for the button */
+    background-color: purple;
+    color: white;
+    cursor: pointer;
+}
+
+#password-submit:hover {
+    background-color: darkpurple;
+}
+
+.close {
+    position: absolute;
+    margin-top: -80px;
+    margin-left: 1150px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 999;
+}
+
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.purple-button {
+    background-color: purple;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.purple-button:hover {
+    background-color: darkpurple;
+}
+
+a {
+    color: white;
+    text-decoration: none; /* Remove underline from all links */
+}

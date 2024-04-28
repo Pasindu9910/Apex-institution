@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="static/index3.css">
+    <title>GRADE 7</title>
+</head>
+<body>
+    <div id="overlay" class="overlay">
+        <div class="overlay-content password-popup">
+            <span class="close">&times;</span>
+            <div id="popup-content" class="popup-content">
+                <img src="static/Logo.png" style="width: 100px; height: 100px; display: block; margin: 0 auto;margin-bottom: 10px;">
+                <input type="password" id="password-input" placeholder="Enter password">
+                <button id="password-submit">ENTER THE QUIZ</button>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="box" id="box1" data-password="6842">PLANT DIVERSITY</div>
+        <div class="box" id="box2" data-password="1935">STATIC ELECTRICITY</div>
+        <div class="box" id="box3" data-password="3985">GENERATION OF ELECTRICITY</div>
+        <div class="box" id="box4" data-password="6238">FUNCTIONS OF WATER</div>
+        <div class="box" id="box5" data-password="2664">ACIDS AND BASES</div>
+        <div class="box" id="box6" data-password="8569">SOUND AND HEARING</div>
+        <div class="box" id="box7" data-password="6532">ANIMAL DIVERSITY</div>
+        <div class="box" id="box8" data-password="6714">FORMS OF ENERGY AND USES</div>
+        <div class="box" id="box9" data-password="5346">THE NATURE OF THE EARTH</div>
+        <div class="box" id="box10" data-password="6234">LIGHT</div>
+        <div class="box" id="box11" data-password="6798">SOUND</div>
+        <div class="box" id="box12" data-password="1683">BIOLOGICAL PROCESSES</div>
+        <div class="box" id="box13" data-password="8394">ATMOSPHERE</div>
+        <div class="box" id="box14" data-password="7522">HEAT AND TEMPERATURE</div>
+        <div class="box" id="box15" data-password="5445">SOIL</div>
+        <div class="box" id="box16" data-password="5235">FORCE AND MOTION</div>
+        <div class="box" id="box17" data-password="7576">NUTRIENTS IN FOOD</div>
+        <div class="box" id="box18" data-password="2362">MINERALS AND ROCKS</div>
+        <div class="box" id="box19" data-password="6465">SOURCES OF ENERGY</div>
+    </div>
+    <button id="refresh-button" style="background-color: yellow; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; position: fixed; top: 20px; right: 20px;">Refresh</button>
+<script>
+   const boxes = document.querySelectorAll('.box');
+    const overlay = document.getElementById('overlay');
+    const closeBtn = document.querySelector('.close');
+    const popupContent = document.getElementById('popup-content');
+    const passwordInput = document.getElementById('password-input');
+    const passwordSubmit = document.getElementById('password-submit');
+    let currentBoxId = null; 
+
+    boxes.forEach(box => {
+        box.addEventListener('click', () => {
+            const password = box.getAttribute('data-password');
+            if (!password) {
+                // If no password is set, show content directly
+                showContent(box.id);
+            } else {
+                // If password is set, show password input overlay
+                overlay.style.display = 'block';
+                passwordInput.value = '';
+                passwordSubmit.onclick = () => {
+                    const enteredPassword = passwordInput.value.trim();
+                    if (enteredPassword === password) {
+                        // If correct password, show content in the overlay
+                        showContent(box.id);
+                        overlay.style.display = 'none'; // Hide the overlay after showing the content
+                    } else {
+                        alert('Incorrect password. Please try again.');
+                    }
+                };
+            }
+        });
+    });
+
+    closeBtn.addEventListener('click', () => {
+        overlay.style.display = 'none';
+        // Reset the popup content and event listener
+        passwordInput.value = '';
+        passwordSubmit.onclick = null;
+        currentBoxId = null; // Reset the current box id
+    });
+
+    overlay.addEventListener('click', (event) => {
+        if (event.target === overlay) {
+            overlay.style.display = 'none';
+            // Reset the popup content and event listener
+            passwordInput.value = '';
+            passwordSubmit.onclick = null;
+            currentBoxId = null; // Reset the current box id
+        }
+    });
+
+    document.getElementById('refresh-button').addEventListener('click', () => {
+        location.reload();
+    });
+
+    function showContent(boxId) {
+        const content = getDummyText(boxId);
+        popupContent.innerHTML = content;
+    }
+    // Function to get dummy text based on box id
+    function getDummyText(boxId) {
+        switch (boxId) {
+            case 'box1':
+                return '<img style="width:1120px;height:583px;" src="static/grade7/plants.jpg"><center><button style="background-color: purple; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;"><a href="https://forms.gle/vSDpESGpVhsFnk7H7" style="color: white;">PLANT DIVERSITY</a></button><center>';
+            case 'box2':
+                return '<img style="width:1120px;height:583px;" src="static/grade7/electricity.jpg"><center><button style="background-color: purple; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;"><a href="https://forms.gle/BJ7qbmW4LRxkp6cJ8" style="color: white;">STATIC ELECTRICITY</a></button><center>';
+            case 'box3':
+                return '<img style="width:1120px;height:583px;" src="static/grade6/electricity.jpg"><center><button style="background-color: purple; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;"><a href="https://forms.gle/di86fLaXkw8AcjVi8" style="color: white;">GENERATION OF ELECTRICITY</a></button><center>';
+            case 'box4':
+                return '<img style="width:1120px;height:583px;" src="static/grade6/water.jpg"><center><button style="background-color: purple; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;"><a href="https://forms.gle/sVyUfMMPktiuKXzp9" style="color: white;">FUNCTIONS OF WATER</a></button><center>';
+            case 'box5':
+                return '<img style="width:1120px;height:583px;" src="static/grade7/chemical.jpg"><center><button style="background-color: purple; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;"><a href="https://forms.gle/44CtDzs8mvNzHMJ6A" style="color: white;">FUNCTIONS OF WATER</a></button><center>';
+            default:
+                return '<p>No content available.</p>';
+        }
+    }
+
+
+
+</script>
+</html>
