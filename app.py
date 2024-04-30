@@ -135,5 +135,5 @@ def grade9():
 def grade10():
     return render_template('grade_10.html')
 
-# if __name__ == "__main__":
-#     app.run(debug=True)
+if __name__ == "__main__":
+    app.run(port = 5000)
