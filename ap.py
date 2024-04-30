@@ -125,5 +125,9 @@ def grade6():
 def grade7():
     return render_template('grade_7.html')
 
+@app.route('/grade8')
+def grade8():
+    return render_template('grade_8.html')
+
 if __name__ == "__main__":
     app.run(debug=True)
