@@ -1,8 +1,6 @@
 from flask import Flask, render_template, request,redirect, url_for,session
 from flask_sqlalchemy import SQLAlchemy
 import bcrypt
-import pickle
-import numpy as np
 
 app = Flask(__name__)
 
@@ -133,5 +131,9 @@ def grade8():
 def grade9():
     return render_template('grade_9.html')
 
-if __name__ == "__main__":
-    app.run(debug=True)
+@app.route('/grade10')
+def grade10():
+    return render_template('grade_10.html')
+
+# if __name__ == "__main__":
+#     app.run(debug=True)

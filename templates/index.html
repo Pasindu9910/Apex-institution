@@ -19,13 +19,16 @@
                 <a href="javascript:void(0);" onclick="navigateToGrade7()">Grade 7</a>
                 <a href="javascript:void(0);" onclick="navigateToGrade8()">Grade 8</a>
                 <a href="javascript:void(0);" onclick="navigateToGrade9()">Grade 9</a>
-                <a href="#">Grade 10</a>
+                <a href="javascript:void(0);" onclick="navigateToGrade10()">Grade 10</a>
                 <a href="#">Grade 11</a>
             </div>
         </div>
           <a href="#" class="nav-link">TIME TABLE</a>
       </div>
   </div>
+<div class="glow-lines"></div>
+<canvas id="asteroidCanvas"></canvas>
+<div class="pointer-glow"></div>
 <div class="atom">
 	<div class="nucleous">
 		<div class="row">
@@ -91,5 +94,123 @@
    function navigateToGrade9(){
       window.location.href = '/grade9';
    }
+   function navigateToGrade10(){
+      window.location.href = '/grade10';
+   }
+
+   document.addEventListener("DOMContentLoaded", function() {
+    const glowLines = document.querySelector('.glow-lines');
+
+    // Function to create a new glowing line
+    function createGlowLine() {
+        const glowLine = document.createElement('div');
+        glowLine.classList.add('glow-line');
+        glowLine.style.top = `${Math.random() * 100}%`;
+        glowLine.style.left = `${Math.random() * 100}%`;
+        glowLines.appendChild(glowLine);
+
+        // Remove the line when it goes beyond the viewport
+        glowLine.addEventListener('animationiteration', () => {
+            glowLine.remove();
+        });
+    }
+
+    // Function to generate glowing lines continuously
+    function generateGlowLines() {
+        setInterval(createGlowLine, 1000); // Adjust the interval as needed
+    }
+
+    generateGlowLines();
+});
+
+document.addEventListener("mousemove", function(event) {
+    var pointerGlow = document.querySelector(".pointer-glow");
+    pointerGlow.style.top = event.clientY + "px";
+    pointerGlow.style.left = event.clientX + "px";
+    pointerGlow.style.opacity = 1;
+});
+
+document.addEventListener("mouseleave", function(event) {
+    var pointerGlow = document.querySelector(".pointer-glow");
+    pointerGlow.style.opacity = 0;
+});
+
+function toggleGlowingLines() {
+    var glowingLines = document.querySelectorAll(".glowing-line");
+    glowingLines.forEach(function(line) {
+        line.style.display = (line.style.display === "none") ? "block" : "none";
+    });
+}
+
+const canvas = document.getElementById('asteroidCanvas');
+const ctx = canvas.getContext('2d');
+
+// Set canvas size
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+// Array to hold asteroids
+const asteroids = [];
+
+// Create asteroids
+function createAsteroids() {
+    for (let i = 0; i < 10; i++) {
+        const asteroid = {
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 20 + 10, // Random size between 10 and 30
+            speed: Math.random() * 2 + 1, // Random speed between 1 and 3
+            color: `rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, 0.5)` // Random red color
+        };
+        asteroids.push(asteroid);
+    }
+}
+
+// Update asteroids position
+function updateAsteroids() {
+    asteroids.forEach(asteroid => {
+        asteroid.x -= asteroid.speed;
+        if (asteroid.x < -asteroid.size) {
+            asteroid.x = canvas.width + asteroid.size;
+            asteroid.y = Math.random() * canvas.height;
+        }
+    });
+}
+
+// Draw asteroids
+function drawAsteroids() {
+   ctx.clearRect(0, 0, canvas.width, canvas.height);
+    asteroids.forEach(asteroid => {
+        // Draw the glowing effect
+        for (let i = 0; i < 5; i++) {
+            const glowRadius = asteroid.size * (1 + i * 0.2); // Increase glow radius with each iteration
+            const opacity = 0.5 - i * 0.1; // Decrease opacity with each iteration
+            const color = `rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${opacity})`;
+            
+            ctx.beginPath();
+            ctx.fillStyle = color;
+            ctx.arc(asteroid.x, asteroid.y, glowRadius, 0, Math.PI * 2);
+            ctx.fill();
+        }
+        
+        // Draw the main asteroid
+        ctx.beginPath();
+        ctx.fillStyle = asteroid.color;
+        ctx.arc(asteroid.x, asteroid.y, asteroid.size, 0, Math.PI * 2);
+        ctx.fill();
+    });
+}
+
+// Animation loop
+function animate() {
+    requestAnimationFrame(animate);
+    updateAsteroids();
+    drawAsteroids();
+}
+
+// Start animation
+createAsteroids();
+animate();
+
 </script>
 </html>

@@ -660,3 +660,88 @@ body:has(.inner-nucleous:hover) .atom .orbits .electron {
 	}
 
 }
+.glow-lines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.glow-line {
+    position: absolute;
+    width: 5px; /* Adjust the width of the lines */
+    height: 5px; /* Adjust the height of the lines */
+    background-color: #fff; /* Adjust the color of the lines */
+    border-radius: 50%;
+    animation: glow-animation 5s linear infinite;
+}
+
+@keyframes glow-animation {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+    50% {
+        opacity: 0.5;
+        transform: translate(100px, 100px) rotate(180deg); /* Adjust the translation and rotation */
+    }
+    100% {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+}
+
+.glow-lines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+	z-index: -1; 
+}
+
+.glow-line {
+    position: absolute;
+    width: 5px; /* Adjust the width of the lines */
+    height: 5px; /* Adjust the height of the lines */
+    background-color: #fff; /* Adjust the color of the lines */
+    border-radius: 50%;
+    animation: glow-animation 5s linear infinite;
+}
+
+.pointer-glow {
+    position: fixed;
+    top: -10px;
+    left: -10px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #fff;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 9999;
+    box-shadow: 0 0 20px 10px #fff; /* Glow effect */
+    transition: opacity 0.3s ease;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #000;
+    position: relative; /* Ensure relative positioning for the body */
+}
+
+canvas {
+    position: absolute; /* Position the canvas absolutely */
+    top: 0;
+    left: 0;
+    z-index: -1; /* Place canvas behind other content */
+    background-color: transparent; /* Make canvas background transparent */
+}
+
